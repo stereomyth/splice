@@ -6,7 +6,7 @@ const save = require('./steps/save.js');
 
 const url =
   process.env.NODE_ENV === 'development'
-    ? 'http://localhost:3333/weekly_film_times.xml'
+    ? 'http://localhost:3333/weekly.xml'
     : 'https://www.cineworld.co.uk/syndication/weekly_film_times.xml';
 
 module.exports = () =>
@@ -15,7 +15,6 @@ module.exports = () =>
     .then(res => parse(res.data))
     .then(convert)
     .then(save)
-    .then(JSON.stringify)
     .catch(err => {
       console.log(err);
       return 'nope';
