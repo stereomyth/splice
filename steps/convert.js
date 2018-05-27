@@ -90,13 +90,16 @@ const convertWeekly = screens => {
       ...films[film],
       screens: {},
     };
-    acc[cid].films[film].screens[type] =
-      acc[cid].films[film].screens[type] || [];
 
-    acc[cid].films[film].screens[type].push({
-      date: data.date[0],
-      ...attr,
-    });
+    if (type) {
+      acc[cid].films[film].screens[type] =
+        acc[cid].films[film].screens[type] || [];
+
+      acc[cid].films[film].screens[type].push({
+        date: data.date[0],
+        ...attr,
+      });
+    }
 
     return acc;
   }, {});
