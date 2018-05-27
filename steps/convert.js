@@ -108,10 +108,7 @@ module.exports = data => {
     films = convertFilms(data.feed.films[0].film);
     weekly = convertWeekly(data.feed.performances[0].screening);
 
-    resolve({
-      // locations,
-      // weekly,
-      weekly: weekly['birmingham-broad-street'],
-    });
+    resolve(weekly);
+    // resolve(weekly['birmingham-broad-street']);
   });
 };

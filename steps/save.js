@@ -1,16 +1,28 @@
 // send to firebase
-// const admin = require('firebase-admin');
+const firebase = require('firebase-admin');
 
-// var serviceAccount = require('./key.json');
+!firebase.apps.length
+  ? firebase
+      .initializeApp({
+        credential: firebase.credential.cert(require('./key.json')),
+      })
+      .firestore()
+  : firebase.app().firestore();
 
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount),
-// });
-
-// const db = admin.firestore();
+const db = firebase.firestore();
 
 module.exports = data => {
   return new Promise((resolve, reject) => {
-    resolve(data);
+    let batch = db.batch();
+
+    Object.keys(data).forEach(cinema => {
+      batch.set(db.collection('weekly').doc(cinema), data[cinema]);
+      delete data[cinema].films;
+      batch.set(db.collection('locations').doc(cinema), data[cinema]);
+    });
+
+    batch.commit();
+
+    resolve(Object.keys(data));
   });
 };
