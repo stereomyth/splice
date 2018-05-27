@@ -1,0 +1,21 @@
+{
+  "name": "splice",
+  "version": "0.0.1",
+  "description": "Cineworld Syndication Conversion",
+  "author": "James King",
+  "main": "index.js",
+  "scripts": {
+    "start": "micro",
+    "dev": "micro-dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stereomyth/splice.git"
+  },
+  "dependencies": {
+    "micro": "^9.3.1"
+  },
+  "devDependencies": {
+    "micro-dev": "^3.0.0"
+  }
+}
