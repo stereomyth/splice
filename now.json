@@ -1,0 +1,6 @@
+{
+  "alias": "cineworld",
+  "env": {
+    "fire_key": "@fire-key"
+  }
+}

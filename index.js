@@ -1,3 +1,4 @@
+require('now-env');
 const axios = require('axios');
 const parse = require('./steps/parse.js');
 const convert = require('./steps/convert.js');
