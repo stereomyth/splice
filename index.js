@@ -8,17 +8,14 @@ const url =
     ? 'http://localhost:3333/weekly_film_times.xml'
     : 'https://www.cineworld.co.uk/syndication/weekly_film_times.xml';
 
-module.exports = (req, res) => {
+module.exports = () =>
   axios
     .get(url)
     .then(res => parse(res.data))
     .then(convert)
     .then(save)
-    .then(data => {
-      res.end(JSON.stringify(data));
-    })
+    .then(JSON.stringify)
     .catch(err => {
       console.log(err);
-      res.end('nope');
+      return 'nope';
     });
-};
