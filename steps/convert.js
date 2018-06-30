@@ -7,10 +7,13 @@ let weekly;
 let cinemaByID = {};
 let filmByID = {};
 
+const urlMask = 'http://www1.cineworld.co.uk/';
+const posterMask = `${urlMask}xmedia-cw/repo/feats/posters/`;
+
 const convertLocations = cinemas => {
   return cinemas.reduce((acc, data) => {
     const cinema = {
-      slug: data.url[0].replace('http://www1.cineworld.co.uk/cinemas/', ''),
+      slug: data.url[0].replace(`${urlMask}cinemas/`, ''),
       name: data.name[0].replace('Cineworld ', ''),
       postcode: data.postcode[0] || '',
     };
@@ -25,10 +28,10 @@ const convertLocations = cinemas => {
 const convertFilms = films => {
   return films.reduce((acc, data) => {
     const film = {
-      slug: data.url[0].replace('http://www1.cineworld.co.uk/films/', ''),
+      slug: data.url[0].replace(`${urlMask}films/`, ''),
       title: data.title[0],
       length: data.runningTime[0],
-      img: data.posterUrl[0],
+      img: data.posterUrl[0].replace(posterMask, ''),
       id: data.id[0],
     };
 
