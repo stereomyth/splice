@@ -2,7 +2,6 @@
 
 let locations;
 let films;
-let weekly;
 
 let cinemaByID = {};
 let filmByID = {};
@@ -108,13 +107,18 @@ const convertWeekly = screens => {
   }, {});
 };
 
+const flatten = data => {
+  return Object.values(data).map(location => {
+    return { ...location, films: Object.values(location.films) };
+  });
+};
+
 module.exports = data => {
   return new Promise((resolve, reject) => {
     locations = convertLocations(data.feed.cinemas[0].cinema);
     films = convertFilms(data.feed.films[0].film);
-    weekly = convertWeekly(data.feed.performances[0].screening);
+    const weekly = convertWeekly(data.feed.performances[0].screening);
 
-    resolve(weekly);
-    // resolve(weekly['birmingham-broad-street']);
+    resolve(flatten(weekly));
   });
 };
