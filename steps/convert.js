@@ -108,9 +108,11 @@ const convertWeekly = screens => {
 };
 
 const flatten = data => {
-  return Object.values(data).map(location => {
-    return { ...location, films: Object.values(location.films) };
+  Object.keys(data).map(location => {
+    data[location].films = Object.values(data[location].films);
   });
+
+  return data;
 };
 
 module.exports = data => {
